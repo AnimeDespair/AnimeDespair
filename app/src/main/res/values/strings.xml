@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lookup Bubble</string>
+    <string name="accessibility_description">Optional: reads visible text only inside Tinder, locally on this phone, to suggest a name and city when you tap Capture. Never reads messages, passwords, other apps, or photos.</string>
+</resources>
