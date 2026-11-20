@@ -110,7 +110,9 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, OverlayService.class);
             if (Build.VERSION.SDK_INT >= 26) startForegroundService(intent);
             else startService(intent);
-            Toast.makeText(this, "Open Tinder and tap the floating 🔎", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, isCaptureEnabled() ? "Open Tinder and tap the floating 🔎"
+                    : "Open Tinder and tap the floating 🔎. Enable Tinder capture (step 2) to auto-fill details.",
+                    Toast.LENGTH_LONG).show();
         } catch (RuntimeException error) {
             Toast.makeText(this, "Could not start overlay: " + error.getMessage(), Toast.LENGTH_LONG).show();
         }

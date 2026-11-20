@@ -15,6 +15,7 @@ public class TinderAccessibilityService extends AccessibilityService {
     private static final Pattern CITY = Pattern.compile(
             "(?i)^(?:lives in|from|located in|living in) +([\\p{L}][\\p{L} .,'-]{1,50})$");
     private static volatile Snapshot lastSnapshot;
+    private static volatile boolean connected;
 
     public static final class Snapshot {
         public final String name;
@@ -27,6 +28,12 @@ public class TinderAccessibilityService extends AccessibilityService {
             this.capturedAt = capturedAt;
         }
     }
+
+    public static boolean isConnected() { return connected; }
+
+    @Override protected void onServiceConnected() { super.onServiceConnected(); connected = true; }
+
+    @Override public boolean onUnbind(android.content.Intent intent) { connected = false; lastSnapshot = null; return super.onUnbind(intent); }
 
     public static Snapshot recentSnapshot() {
         Snapshot value = lastSnapshot;
@@ -85,5 +92,5 @@ public class TinderAccessibilityService extends AccessibilityService {
     }
 
     @Override public void onInterrupt() {}
-    @Override public void onDestroy() { super.onDestroy(); lastSnapshot = null; }
+    @Override public void onDestroy() { super.onDestroy(); connected = false; lastSnapshot = null; }
 }

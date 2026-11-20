@@ -26,7 +26,7 @@ This source package doesn't bundle a binary APK or Gradle wrapper JAR. If you ha
 3. Optionally tap **Accessibility settings** and enable **Optional Tinder text capture**, after reviewing its description. This permission is powerful: enable it only if you want the optional name suggestion feature. Android controls this grant; this app cannot enable it for you.
 4. Tap **Start floating bubble** and allow notifications if requested.
 5. Switch to Tinder, open a visible profile, then tap the floating bubble.
-6. Enter name/city manually or tap **Suggest from Tinder screen** (if Accessibility capture is enabled); review any suggested details.
+6. With Accessibility capture enabled, the name/city are filled in automatically when you open the panel; tap **Suggest from Tinder screen** to refresh, or enter them manually. Review any suggested details.
 7. Tap **Search Facebook People** or **Search public Facebook via Google**. Your browser opens the search. Facebook may require login; search results may be inaccurate or unavailable.
 8. Tap **Stop floating bubble** when finished. Disable Accessibility in settings whenever you don't need it.
 
