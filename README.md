@@ -19,6 +19,12 @@ A native Java Android app for a **user-controlled floating search panel** on Tin
 
 This source package doesn't bundle a binary APK or Gradle wrapper JAR. If you have Gradle 8.11.1 and Android SDK installed, build using `gradle :app:assembleDebug`. On GitHub, the included GitHub Actions workflow builds the APK on the `dating-lookup-overlay` branch.
 
+## Install on your phone
+
+1. Create a release by pushing a version tag: `git tag v1.0.0 && git push origin v1.0.0`. The workflow builds the APK and publishes it on the repository's **Releases** page.
+2. On your Android phone, open the Releases page, download `lookup-bubble-debug.apk` and open it. Allow installs from your browser when prompted.
+3. Or, for any build, download the `lookup-bubble-debug-apk` artifact from the workflow run, or use `adb install -r app-debug.apk`.
+
 ## Configure on the phone
 
 1. Launch **Lookup Bubble**.
