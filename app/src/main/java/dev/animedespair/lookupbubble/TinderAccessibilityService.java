@@ -36,10 +36,6 @@ public class TinderAccessibilityService extends AccessibilityService {
 
     public static boolean isConnected() { return connected; }
 
-    @Override protected void onServiceConnected() { super.onServiceConnected(); connected = true; }
-
-    @Override public boolean onUnbind(android.content.Intent intent) { connected = false; lastSnapshot = null; return super.onUnbind(intent); }
-
     private static volatile TinderAccessibilityService instance;
 
     /** Scans the Tinder window now (it may no longer be the active window once the panel is open). */
