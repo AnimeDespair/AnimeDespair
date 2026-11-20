@@ -175,7 +175,7 @@ public class OverlayService extends Service {
         hintText = Ui.text(this, "Optional: enable Tinder text capture in app settings.", 12, false, Ui.MUTED);
         Ui.space(this, content, 8);
         content.addView(hintText);
-        capture.setOnClickListener(v -> captureSuggestion());
+        capture.setOnClickListener(v -> captureSuggestion(false));
         Ui.space(this, content, 14);
 
         Button facebook = Ui.button(this, "Search Facebook People", true);
@@ -189,6 +189,8 @@ public class OverlayService extends Service {
         Button stop = Ui.button(this, "Stop floating bubble", false);
         content.addView(stop, new LinearLayout.LayoutParams(-1, Ui.dp(this, 45)));
         stop.setOnClickListener(v -> stopSelf());
+
+        captureSuggestion(true);
 
         int width = Math.min(Ui.dp(this, 350), getResources().getDisplayMetrics().widthPixels - Ui.dp(this, 20));
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
@@ -208,15 +210,20 @@ public class OverlayService extends Service {
         }
     }
 
-    private void captureSuggestion() {
+    private void captureSuggestion(boolean automatic) {
         TinderAccessibilityService.Snapshot suggestion = TinderAccessibilityService.recentSnapshot();
         if (suggestion == null || suggestion.name.isEmpty()) {
+            if (!TinderAccessibilityService.isConnected()) {
+                hintText.setText("Tinder capture is off. Enable it in the Lookup Bubble app to auto-fill, or enter the name.");
+                return;
+            }
+            if (automatic) return;
             hintText.setText("No recent Tinder profile detected. Open a profile in Tinder and try again, or enter the name.");
             return;
         }
         nameField.setText(suggestion.name);
         if (!suggestion.city.isEmpty()) cityField.setText(suggestion.city);
-        hintText.setText("Suggested from Tinder text. Verify before searching.");
+        hintText.setText("Auto-filled from Tinder text. Verify before searching.");
     }
 
     private void openSearch(boolean google) {
